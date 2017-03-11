@@ -9,7 +9,8 @@ var index = require('./routes/index');
 var about = require('./routes/about');
 var colabore = require('./routes/colabore');
 var parcero = require('./routes/parcero');
-var omeka = require('./routes/omeka');
+var portfolio = require('./routes/portfolio');
+var hbs = require('hbs');
 
 var app = express();
 
@@ -30,7 +31,7 @@ app.use('/', index);
 app.use('/about', about);
 app.use('/colabore', colabore);
 app.use('/parcero', parcero);
-app.use('/omeka', omeka);
+app.use('/portfolio', portfolio);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {1
@@ -44,6 +45,14 @@ app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // registra un nuevo helper
+  // {{ifeq}}
+  hbs.registerHelper('ifeq', function(a,b,opts){
+    if(a===b){
+      return opts.fn(this);
+    }
+  });
 
   // render the1 error page
   res.status(err.status || 500);

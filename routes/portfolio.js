@@ -109,7 +109,7 @@ router.get('/', function(req, res) {
       console.log(err);
     }
     // Hace el render de la vista con la informacion obtenida del Omeka
-    res.render('omeka', {
+    res.render('portfolio', {
       item: item,
       items: items,
       collection: collection,
